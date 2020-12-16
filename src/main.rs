@@ -1,8 +1,8 @@
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use fibrs_lib::caches::SimpleCache;
+use fibrs_lib::Cache;
 use std::io;
 use std::sync::Mutex;
-use fibrs_lib::Cache;
 
 #[derive(Debug)]
 struct AppState {
@@ -14,12 +14,12 @@ async fn status() -> impl Responder {
     HttpResponse::Ok()
 }
 
-#[get("/fib")]
-async fn get_fib(data: web::Data<AppState>) -> String {
+#[get("/fib/{n}")]
+async fn get_fib(web::Path(n): web::Path<usize>, app_data: web::Data<AppState>) -> String {
     // TODO: do not unwrap directly
-    let mut cache = data.cache.lock().unwrap();
+    let mut cache = app_data.cache.lock().unwrap();
     // TODO: u64 doesn't work, figure out why
-    format!("{}", cache.fib(12))
+    format!("{}", cache.fib(n))
 }
 
 #[actix_web::main]
