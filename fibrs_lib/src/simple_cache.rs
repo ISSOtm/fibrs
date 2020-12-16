@@ -20,8 +20,13 @@ impl Cache<usize, u64> for SimpleCache {
         }
         self.0[n]
     }
+
+    fn reverse(&self, _: u64) -> usize {
+        todo!()
+    }
 }
 
+// Check the first few in the sequence, which should be a good indication that the algorithm is good
 #[test]
 fn first_13() {
     let mut cache = SimpleCache::new();
