@@ -1,0 +1,10 @@
+[package]
+name = "fibrs"
+version = "0.1.0"
+authors = ["ISSOtm <me@eldred.fr>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fibrs-lib = { path = "fibrs_lib" }
